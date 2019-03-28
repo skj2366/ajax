@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<script>
+	var xhr = new XMLHttpRequest(); //function의 메모리 호출과 생성은 앞에 new가 붙냐 안붙냐로 구분 가능.
+	xhr.open('GET','/ajax');		//호출할 주소 : /ajax , 메소드는 GET(메소드라서 대문자로 사용 )
+	xhr.onreadystatechange = function(){	//on붙으면 이벤트, 뒤에 있는걸 읽으면 어떤 기능을 할지 대충 예상 가능. change => 변하다.
+		if(xhr.readyState==4 && xhr.status==200){	//readyState는 5단계가 있다. 0~4까지 4가 연결되는것.
+													//var xhr = new XMLHttpRequest(); 이때가 0인데 이때는 전화기가 생긴것.
+													//xhr.open('GET','/ajax'); 이부분이 1단계, 전화가 걸리는 것.
+													//전화를 받으면 2
+													//요청한 무언가를 하는 것이 3.
+													//요청을 완료하고 응답하고 전화를 끊는것이 4.if 안에서 도는것이 2~4
+			console.log(xhr.response);
+		}											
+	}
+	xhr.send();
+</script>
+</body>
+</html>

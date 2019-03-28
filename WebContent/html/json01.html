@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<script>
+	//JavaScript
+	//데이터 타입을 선언하지는 않지만 내부적으로는 데이터 타입이 존재
+	//null, undefineded, String, Number, Object, Function, Boolean
+	//클로저 = > function 안에 function 선언 가능
+	//명명 규칙은 자바와 동일하게 카멜 !
+	
+/*	var test = 'a' + "a";
+	alert(test); //aa
+	var num = 1;
+	alert(num++); //1
+	alert(num); //2
+	alert(--num); //1
+	alert(num%10); //1*/
+	
+	/*for(var i=1;i<10;i++){
+		alert(i); //1~9
+	} while do while도 마찬가지로 존재한다.*/
+	
+	//document.write('나나나'); //html 페이지에 write를 한다.
+	/*for(var i=1;i<=10;i++){
+		document.write('나나나<br>');
+	}*/
+	
+	/*var arr=[];
+	var m = {};
+	for(var i=0;i<=2;i++){
+		m['key'] = i;
+		arr[i]=m;
+	}
+	console.log(arr);
+	var jsonStr = JSON.stringify(arr);
+	console.log(jsonStr);
+	=> {"key":2},{"key":2},{"key":2}
+	*/
+	
+	var arr=[];
+	for(var i=0;i<=2;i++){
+		var m = {};//구조체, 이때 메모리 생성, 맵처럼 사용 가능.
+		m['key'] = i;
+		arr[i]=m;
+	}
+	console.log(arr);
+	var jsonStr = JSON.stringify(arr);
+	console.log(jsonStr);
+	//=>{"key":0},{"key":1},{"key":2}
+	
+</script>
+</body>
+</html>
