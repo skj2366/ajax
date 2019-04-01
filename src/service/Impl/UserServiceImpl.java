@@ -31,5 +31,10 @@ public class UserServiceImpl implements UserService {
 //		
 //		System.out.println(udao.insertUser(test));
 	}
+
+	@Override
+	public Map<String, String> login(String uiId, String uiPwd) {
+		return udao.selectUserByUiId(uiId,uiPwd);
+	}
 	
 }

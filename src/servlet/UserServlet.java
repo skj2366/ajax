@@ -9,6 +9,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import service.UserService;
 import service.Impl.UserServiceImpl;
@@ -41,7 +42,7 @@ public class UserServlet extends HttpServlet {
 			}
 			RequestDispatcher rd = request.getRequestDispatcher("/views/msg/result");
 			rd.forward(request, response);
-		}else if("login".equals(cmd)){
+		}/*else if("login".equals(cmd)){
 			String uiId = request.getParameter("ui_id");
 			String uiPwd = request.getParameter("ui_pwd");
 			Map<String,String> user = new HashMap<>();
@@ -54,6 +55,27 @@ public class UserServlet extends HttpServlet {
 				request.setAttribute("msg", "아이디 및 비밀번호를 확인해 주세요.");
 				request.setAttribute("url", "/");
 			}
+			RequestDispatcher rd = request.getRequestDispatcher("/views/msg/result");
+			rd.forward(request, response); //내가한거. 
+		}*/else if("login".equals(cmd)) {
+			String uiId = request.getParameter("ui_id");
+			String uiPwd = request.getParameter("ui_pwd");
+			Map<String,String> user = us.login(uiId, uiPwd);
+			request.setAttribute("msg","아이디나 비밀번호가 잘못되었습니다.");
+			if(user!=null) {
+				HttpSession session = request.getSession();
+				session.setAttribute("user", user);
+				request.setAttribute("msg","로그인에 성공하였습니다.");
+			}
+			request.setAttribute("url", "/");
+			RequestDispatcher rd = 
+					request.getRequestDispatcher("/views/msg/result");
+			rd.forward(request, response); //  선생님 ver.
+		}else if("logout".equals(cmd)) {
+			HttpSession session = request.getSession();
+			session.invalidate();
+			request.setAttribute("msg","로그아웃 되었습니다.");
+			request.setAttribute("url", "/");
 			RequestDispatcher rd = request.getRequestDispatcher("/views/msg/result");
 			rd.forward(request, response);
 		}
