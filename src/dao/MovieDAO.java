@@ -9,4 +9,5 @@ public interface MovieDAO {
 	public int insertMovie(Map<String,String> movie);
 	public int updateMovie(Map<String,String> movie);
 	public int deleteMovie(int miNum);
+	public Map<String,String> selectMovieByMiNum(int miNum);
 }

@@ -18,6 +18,7 @@ public class MovieDAOImpl implements MovieDAO {
 			+ " values(seq_mi_num.nextval,?,?,?,?,?)";
 	private static final String UPDATE_MOVIE_BY_MI_NUM = "update set mi_name=?, mi_year=?, mi_national, mi_vendor, mi_director from movie_info where mi_num=?";
 	private static final String DELETE_MOVIE_BY_MI_NUM = "delete from movie_info where mi_num=?";
+	private static final String SELECT_MOVIE_BY_MI_NUM = "select * from movie_info where mi_num=?";
 
 	@Override
 	public List<Map<String, String>> selectMovieList() {
@@ -95,8 +96,35 @@ public class MovieDAOImpl implements MovieDAO {
 			return ps.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}finally {
+			DBCon.close();
 		}
 		return 0;
+	}
+
+	@Override
+	public Map<String, String> selectMovieByMiNum(int miNum) {
+		
+		try {
+			PreparedStatement ps = DBCon.getCon().prepareStatement(SELECT_MOVIE_BY_MI_NUM);
+			ps.setInt(1, miNum);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				Map<String, String> movieMap = new HashMap<>();
+				movieMap.put("mi_num", rs.getString("mi_num"));
+				movieMap.put("mi_name", rs.getString("mi_name"));
+				movieMap.put("mi_year", rs.getString("mi_year"));
+				movieMap.put("mi_national", rs.getString("mi_national"));
+				movieMap.put("mi_vendor", rs.getString("mi_vendor"));
+				movieMap.put("mi_director", rs.getString("mi_director"));
+				return movieMap;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			DBCon.close();
+		}
+		return null;
 	}
 
 //	public static void main(String[] args) {

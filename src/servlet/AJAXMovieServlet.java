@@ -1,7 +1,7 @@
 package servlet;
 
 import java.io.IOException;
-import java.util.HashMap;
+import java.io.PrintWriter;
 import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
@@ -11,35 +11,31 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.google.gson.Gson;
+
 import service.MovieService;
 import service.Impl.MovieServiceImpl;
 import utils.Command;
 
-public class MovieServlet extends HttpServlet {
+public class AJAXMovieServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	private MovieService ms = new MovieServiceImpl();
+	private Gson gson = new Gson();
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
-		
-//		String uri = request.getRequestURI();
-		
-//		int idx = uri.lastIndexOf("/");
-//		if(idx==0) {
-//			throw new ServletException("원하는 서비스가 부정확합니다.");
-//		}else {
 		String cmd = Command.getCmd(request);
+		response.setCharacterEncoding("utf-8");
+		response.setContentType("text/html;charset=utf-8");
+		
 			System.out.println(cmd);
 			if("list".equals(cmd)) {
-				request.setAttribute("list", ms.selectMovieList());				
-				RequestDispatcher rd = request.getRequestDispatcher("/views/movie/movie_list");
-				rd.forward(request, response);
+				PrintWriter pw = response.getWriter();
+				pw.println(gson.toJson(ms.selectMovieList()));
 			}else {
 				try {
 					int miNum = Integer.parseInt(cmd);
-					request.setAttribute("movie", ms.selectMovieByMiNum(miNum));
-					RequestDispatcher rd = request.getRequestDispatcher("/views/movie/view");
-					rd.forward(request, response);
+					PrintWriter pw = response.getWriter();
+					pw.println(gson.toJson(ms.selectMovieByMiNum(miNum)));
 				}catch(Exception e) {
 					throw new ServletException("올바른 상세조회 값이 아닙니다.");
 				}

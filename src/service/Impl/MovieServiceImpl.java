@@ -26,6 +26,10 @@ public class MovieServiceImpl implements MovieService {
 	public int deleteMovie(int miNum) {
 		return mdao.deleteMovie(miNum);
 	}
+	@Override
+	public Map<String, String> selectMovieByMiNum(int miNum) {
+		return mdao.selectMovieByMiNum(miNum);
+	}
 	
 //	public static void main(String[] args) {
 //		MovieService ms = new MovieServiceImpl();

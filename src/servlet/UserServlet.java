@@ -68,8 +68,7 @@ public class UserServlet extends HttpServlet {
 				request.setAttribute("msg","로그인에 성공하였습니다.");
 			}
 			request.setAttribute("url", "/");
-			RequestDispatcher rd = 
-					request.getRequestDispatcher("/views/msg/result");
+			RequestDispatcher rd = request.getRequestDispatcher("/views/msg/result");
 			rd.forward(request, response); //  선생님 ver.
 		}else if("logout".equals(cmd)) {
 			HttpSession session = request.getSession();
