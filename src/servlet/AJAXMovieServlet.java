@@ -2,6 +2,7 @@ package servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
@@ -55,8 +56,12 @@ public class AJAXMovieServlet extends HttpServlet {
 		String cmd = Command.getCmd(request);
 			if("insert".equals(cmd)) {
 				HttpSession hs = request.getSession();
+				Map<String,String> rMap = new HashMap<>();
 				if(hs.getAttribute("user")==null) {
-					Command.goResultPage(request, response, "/", "로그인하세요");
+					rMap.put("msg","로그인하세요");
+					rMap.put("url", "/");
+					Command.printJSON(response, rMap);
+					//Command.goResultPage(request, response, "/", "로그인하세요");
 //					request.setAttribute("msg", "로그인 해주세요.");
 //					request.setAttribute("url", "/");
 //					RequestDispatcher rd = request.getRequestDispatcher("/views/msg/result");
@@ -71,17 +76,19 @@ public class AJAXMovieServlet extends HttpServlet {
 //				movie.put("mi_director", request.getParameter("mi_director"));
 				Map<String,String> movie = Command.getSingleMap(request);
 //				request.setAttribute("msg", "영화등록실패!");
-				String msg = "영화등록실패!";
-				String url = "/";
+				rMap.put("msg","영화등록실패!");
+				rMap.put("url","/views/movie/ajax_list");
 				if(ms.insertMovie(movie)==1) {
+					rMap.put("msg","영화등록성공!");
 //					request.setAttribute("msg", "영화등록성공");
-					msg = "영화등록성공!";
-					url = "/movie/list";
+//					msg = "영화등록성공!";
+//					url = "/movie/list";
 				}
+				Command.printJSON(response, rMap);
 //				request.setAttribute("url", "/movie/list");
 //				RequestDispatcher rd = request.getRequestDispatcher("/views/msg/result");
 //				rd.forward(request, response);//선생님 방식.조금더 간결.
-				Command.goResultPage(request, response, url, msg);
+//				Command.goResultPage(request, response, url, msg);
 				
 //				if(ms.insertMovie(movie)==1) {//내방식
 //					request.setAttribute("msg", "정상적으로 입력되었습니다");
@@ -118,18 +125,20 @@ public class AJAXMovieServlet extends HttpServlet {
 				int miNum = Integer.parseInt(request.getParameter("mi_num"));
 //				request.setAttribute("msg", "삭제에 실패하였습니다.");
 //				request.setAttribute("url", "/movie/" + miNum);
-				String msg = "삭제 실패";
-				String url = "/movie/" + miNum;
+				Map<String,String> rMap = new HashMap<>();
+				rMap.put("msg","삭제에 실패하였습니다.");
+				rMap.put("url", "/views/movie/ajax_list");
 				if(ms.deleteMovie(miNum)==1) {
+					rMap.put("msg","삭제에 성공하였습니다.");
 //					request.setAttribute("msg", "삭제에 성공하였습니다.");
 //					request.setAttribute("url", "/movie/list");
 //					RequestDispatcher rd = request.getRequestDispatcher("/views/msg/result");
 //					rd.forward(request, response);
-					msg = "삭제 성공";
-					url = "/movie/list";
-					Command.goResultPage(request, response, url, msg);
+//					msg = "삭제 성공";
+//					url = "/movie/list";
+//					Command.goResultPage(request, response, url, msg);
 				}
-				
+				Command.printJSON(response, rMap);
 			}
 		//}
 		

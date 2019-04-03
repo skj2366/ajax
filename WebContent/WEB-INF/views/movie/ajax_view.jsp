@@ -20,7 +20,25 @@
 		<tbody id="tbody">
 		</tbody>
 	</table>
+	<c:if test="${sessionScope.user!=null }">
+		<button onclick="deleteMovie()">삭제</button>
+	</c:if>
 	<script>
+		function deleteMovie(){
+
+			xhr.open('POST', '/am/delete');
+			xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+			xhr.onreadystatechange = function() {
+				if (xhr.readyState == 4 && xhr.status == 200) {
+					var result = JSON.parse(xhr.response);
+					alert(result.msg);
+					if(result.url){
+						location.href = result.url;	
+					}
+				}
+			}
+			xhr.send('mi_num=${param.miNum}');
+		}
 		var xhr = new XMLHttpRequest();
 		xhr.open('GET', '/am/${param.miNum}');
 		xhr.onreadystatechange = function() {
