@@ -24,6 +24,7 @@ public class FIleServiceImpl implements FileService {
 			if(obj instanceof FileItem) {
 				try {
 					File tFile = UploadFIle.writeFile((FileItem)obj);
+					return insertAddrFromFile(tFile);
 					
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -31,6 +32,12 @@ public class FIleServiceImpl implements FileService {
 				
 			}
 		}
+		return null;
+	}
+
+	@Override
+	public Map<String, String> insertAddrFromFile(File file) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 
