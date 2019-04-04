@@ -26,7 +26,7 @@ public class EncodingFilter implements Filter {
 
 	public void init(FilterConfig fConfig) throws ServletException {
 		encoding = fConfig.getInitParameter("encoding");
-		//System.out.println("난 생선된 다음에 호출됨!!!");
+		System.out.println("난 생선된 다음에 호출됨!!!");
 	}
 
 }
