@@ -54,4 +54,9 @@ public class Command {
 		PrintWriter pw = response.getWriter();
 		pw.print(JSON.toJson(obj));
 	}
+	
+	public static void goPage(HttpServletRequest request,HttpServletResponse response,String url) throws ServletException, IOException {
+		RequestDispatcher rd = request.getRequestDispatcher(url);
+		rd.forward(request, response);
+	}
 }
