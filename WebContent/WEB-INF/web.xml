@@ -62,7 +62,6 @@
     <servlet-name>AJAXMovieServlet</servlet-name>
     <url-pattern>/am/*</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>FileServlet</servlet-name>
     <servlet-class>servlet.FileServlet</servlet-class>
