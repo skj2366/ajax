@@ -23,7 +23,7 @@
 		}
 	}
 </script>
-<label for="ad_dong">읍면동 : </label><input type="text" name="ad_dong" id="ad_dong" value="죽교" onkeypress="enter()">
+<label for="ad_dong">읍면동 : </label><input type="text" name="ad_dong" id="ad_dong" value="${param.ad_dong}" onkeypress="enter()">
 <button onclick="search()">검색</button><br>
 <select name="pageCount" onchange="changePageCount(this)">
 	<option value="10"
