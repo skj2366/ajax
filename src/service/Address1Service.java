@@ -7,5 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 
 public interface Address1Service {
 	public List<Map<String,String>> selectAddrList(HttpServletRequest request);
+	public void selectAddr(HttpServletRequest request);
 	public int selectTotalAddrCount();
 }

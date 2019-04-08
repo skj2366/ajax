@@ -68,7 +68,7 @@
 				<td style="background-color: pink;">${addr.ad_num}</td>
 				<td style="background-color: pink;">${addr.ad_sido}</td>
 				<td style="background-color: pink;">${addr.ad_gugun}</td>
-				<td style="background-color: pink;">${addr.ad_dong}</td>
+				<td style="background-color: pink;"><a href="/addr/view?ad_num=${addr.ad_num}&page=${page}&pageCount=${pageCount}&ad_dong=${param.ad_dong}">${addr.ad_dong}</a></td>
 				<td style="background-color: pink;">${addr.ad_lee}</td>
 				<td style="background-color: pink;">${addr.ad_bunji}</td>
 				<td style="background-color: pink;">${addr.ad_ho}</td>
