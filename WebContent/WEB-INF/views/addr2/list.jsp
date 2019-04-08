@@ -94,6 +94,7 @@
 				html += '</td>';
 				html +='</tr>';				
 				document.querySelector('#tBody').innerHTML = html;
+				
 			}
 		}
 	}
