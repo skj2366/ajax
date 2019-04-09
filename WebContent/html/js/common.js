@@ -21,7 +21,7 @@ var AjaxUtil = function(){
 		xhr.onreadystatechange = function(){
 			if(xhr.readyState==4 && xhr.status==200){
 				this.callback(xhr.response);
-				console.log(xhr.response);
+				//console.log(xhr.response);
 			}
 		}
 	}
