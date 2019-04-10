@@ -14,12 +14,12 @@ var CommonFunc = function(){
 
 var AjaxUtil = function(){
 	var xhr = new XMLHttpRequest();
-	this.open = function(url,method,async){
-		method = method?method:'GET'; //아무것도 적지 않았을시 default값을 'GET'으로 
-		async = async?async:true;
-		xhr.open(method, url, async);
+	this.open = function(config){
+		config.method = config.method?config.method:'GET'; //아무것도 적지 않았을시 default값을 'GET'으로 
+		config.async = config.async?config.async:true;
+		xhr.open(config.method, config.url, config.async);
 		xhr.onreadystatechange = function(){
-			if(xhr.readyState==4 && xhr.status==200){
+			if(xhr.readyState===xhr.DONE && xhr.status===200){
 				this.callback(xhr.response);
 				//console.log(xhr.response);
 			}

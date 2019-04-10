@@ -27,7 +27,11 @@
 		}
 		
 		var au = new AjaxUtil();
-		au.open('/addr2/list');
+		var config = {
+				url : '/addr2/list',
+				callback : callback
+		}
+		au.open(config);
 		au.setCallback(callback);
 		au.send();
 	</script>

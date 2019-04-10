@@ -38,7 +38,29 @@ public class AddrServlet2 extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+//		Map<String,String> param = Command.fromJSON(request);
+//		System.out.println(param);
+//		int cnt=as.updateAddr(param);
+//		Map<String,Object> rMap = new HashMap<>();
+//		if(cnt==1) {
+//			rMap.put("msg","true");
+//			rMap.put("update","true");
+//			Command.printJSON(response, rMap);
+//		}else {
+//			rMap.put("msg","false");
+//			rMap.put("update","false");
+//			Command.printJSON(response, rMap);
+//		}			//나 
+		
+		String cmd = Command.getCmd(request); // 선생님 
+		if("update".equals(cmd)) {
+			Map<String,String> rMap = as.updateAddr2(request);
+			Command.printJSON(response, rMap);
+		}else if("delete".equals(cmd)) {
+			Map<String,String> rMap = as.deleteAddr(request);
+			Command.printJSON(response, rMap);
+		}
+	
 	}
 
 }

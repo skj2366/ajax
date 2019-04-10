@@ -1,5 +1,7 @@
 package service.Impl;
 
+import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -150,6 +152,38 @@ private Address1DAO adao = new Address1DAOImpl();
 		request.setAttribute("page", page);
 		request.setAttribute("pageCount", pageCount);
 		request.setAttribute("addr", adao.selectAddr(paramMap));
+	}
+
+	@Override
+	public int updateAddr(Map<String, String> addr) { // 나
+		return adao.updateAddr(addr);
+	}
+
+	@Override
+	public Map<String, String> updateAddr2(HttpServletRequest request) throws IOException { // 선생님
+
+		Map<String, String> addr = Command.fromJSON(request);
+		Map<String, String> rMap = new HashMap<>();
+		rMap.put("update", "false");
+		rMap.put("msg", "수정이 실패 하였습니다.");
+		if(adao.updateAddr(addr)==1) {
+			rMap.put("update", "true");
+			rMap.put("msg", "수정이 성공 하였습니다.");
+		}
+		return rMap;
+	}
+
+	@Override
+	public Map<String, String> deleteAddr(HttpServletRequest request) throws IOException {
+		Map<String, String> addr = Command.fromJSON(request);
+		Map<String, String> rMap = new HashMap<>();
+		rMap.put("update", "false");
+		rMap.put("msg", "삭제를 실패 하였습니다.");
+		if(adao.deleteAddr(addr)==1) {
+			rMap.put("update", "true");
+			rMap.put("msg", "삭제를 성공 하였습니다.");
+		}
+		return rMap;
 	}
 
 
