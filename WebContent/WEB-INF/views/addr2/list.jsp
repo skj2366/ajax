@@ -31,7 +31,7 @@
 			<th>리</th>
 			<th>번지</th>
 			<th>호</th>
-			<!-- <th>삭제</th> -->
+			<th>삭제</th>
 		</tr>
 		<tbody id="tBody">
 		</tbody>
@@ -124,27 +124,23 @@
 		xhr.send(JSON.stringify(params));
 	}
 	
-	function deleteAddr2(addrNum){
+	function deleteAddr2(adNum){
 		var xhr = new XMLHttpRequest();
-		var inputs = document.querySelectorAll('input[id]'); //모든 아이디 값을 가져온드앙
-		var params = {};
-		for(var i=0;i<inputs.length;i++){
-			var input = inputs[i];
-			params[input.id]=input.value;
-		}
+		var inputs = document.querySelectorAll('input[id]');
+		var params = {adNum:adNum};
+		
 		xhr.open('POST','/addr2/delete');
 		xhr.setRequestHeader('Content-Type','application/json');
 		xhr.onreadystatechange = function(){
-			if(xhr.readyState===4 && xhr.status===200){
-				var res = JSON.parse(xhr.response);
-				alert(res.msg);
-				if(res.update==='true'){
-					getList();
-					closeTable();
-					
-				}else{
-					getList();
-					closeTable();
+			if(xhr.readyState===4){
+				if(xhr.status===200){
+					var res = JSON.parse(xhr.response);
+					alert(res.msg);
+					if(res.update==='true'){
+						getList();
+					}else{
+						
+					}
 				}
 			}
 		}
@@ -170,7 +166,7 @@
 						html += '<td>' + (addr.ad_lee?addr.ad_lee:'') + '</td>';
 						html += '<td>' + addr.ad_bunji + '</td>';
 						html += '<td>' + addr.ad_ho + '</td>';
-						//html += '<td><button onclick="deleteAddr2(' + addr.ad_num + ')">삭제</button>'
+						html += '<td><button onclick="deleteAddr2(\'' + addr.ad_num + '\')">삭제</button></td>';
 						html += '</tr>';
 					}
 					html +='<tr>';
